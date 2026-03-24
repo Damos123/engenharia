@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Studies Tracker - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-python"></i>
+                    <h1>Python Studies Tracker</h1>
+                </div>
+                <div class="header-stats">
+                    <span class="badge" id="totalTasks">0 tarefas</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Progress Overview -->
+            <section class="progress-section">
+                <h2><i class="fas fa-chart-line"></i> Minha Evolução</h2>
+                <div class="progress-cards">
+                    <div class="progress-card overall">
+                        <div class="progress-circle" id="overallProgress">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="progress" cx="50" cy="50" r="45" id="progressCircle"></circle>
+                            </svg>
+                            <div class="percentage" id="progressPercentage">0%</div>
+                        </div>
+                        <div class="progress-info">
+                            <h3>Progresso Geral</h3>
+                            <p id="progressText">0 de 0 tarefas concluídas</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="completedCount">0</span>
+                                <span class="stat-label">Concluídas</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="pendingCount">0</span>
+                                <span class="stat-label">Pendentes</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-hourglass-half"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="totalTime">0h</span>
+                                <span class="stat-label">Tempo Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="chart-container">
+                    <h3><i class="fas fa-layer-group"></i> Por Categoria</h3>
+                    <div class="chart-content" id="categoryChart">
+                        <!-- Barras de categoria serão inseridas aqui -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3><i class="fas fa-signal"></i> Por Dificuldade</h3>
+                    <div class="chart-content" id="difficultyChart">
+                        <!-- Barras de dificuldade serão inseridas aqui -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Task Section -->
+            <section class="add-task-section">
+                <h2><i class="fas fa-plus-circle"></i> Nova Tarefa de Estudo</h2>
+                <form id="taskForm" class="task-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" id="titulo" name="titulo" placeholder="Ex: Decoradores em Python" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="">Selecione...</option>
+                                <option value="Basico">Básico</option>
+                                <option value="Intermediario">Intermediário</option>
+                                <option value="Avancado">Avançado</option>
+                                <option value="Frameworks">Frameworks (Django/Flask)</option>
+                                <option value="DataScience">Data Science</option>
+                                <option value="Automacao">Automação</option>
+                                <option value="APIs">APIs e Web</option>
+                                <option value="Testes">Testes</option>
+                                <option value="BoasPraticas">Boas Práticas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dificuldade">Dificuldade</label>
+                            <select id="dificuldade" name="dificuldade" required>
+                                <option value="">Selecione...</option>
+                                <option value="Facil">Fácil</option>
+                                <option value="Medio">Médio</option>
+                                <option value="Dificil">Difícil</option>
+                                <option value="Especialista">Especialista</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempoEstimado">Tempo Estimado (minutos)</label>
+                            <input type="number" id="tempoEstimado" name="tempoEstimadoMinutos" min="5" value="30" required>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" name="descricao" rows="3" placeholder="Descreva o que você vai estudar..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Adicionar Tarefa
+                    </button>
+                </form>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list-check"></i> Minhas Tarefas</h2>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="pending">Pendentes</button>
+                        <button class="filter-btn" data-filter="completed">Concluídas</button>
+                    </div>
+                </div>
+                <div class="tasks-list" id="tasksList">
+                    <!-- Tarefas serão inseridas aqui -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
