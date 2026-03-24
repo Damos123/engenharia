@@ -137,7 +137,7 @@ Abra no navegador: `http://localhost:8080`
 
 **Login:**
 - Usuário: `estudante`
-- Senha: `python2024`
+- Senha: ``
 
 ---
 
