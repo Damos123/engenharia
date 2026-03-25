@@ -82,7 +82,7 @@ criarNovaTarefa(dados) → fetch POST /api/tasks
 ### 3. **Autenticação Segura**
 Todas as requisições incluem credenciais HTTP Basic:
 - **Usuário:** `estudante`
-- **Senha:** `python2024`
+- **Senha:** ``
 
 ```javascript
 headers: {
